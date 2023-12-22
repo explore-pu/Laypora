@@ -1,9 +1,12 @@
+/*@import "aieditor/dist/style.css";*/
+@import "style.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+@layer base {
   ul {
-    @apply list-disc;
+    @apply ps-5;
   }
 }
