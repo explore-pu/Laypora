@@ -27,6 +27,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->get('/resources', ['uses' => 'ResourceController@index', 'as' => 'resources.index', 'name' => '资源列表']);
+        $router->post('/store/resource', ['uses' => 'ResourceController@store', 'as' => 'resources.store', 'name' => '资源存储']);
 
     });
 });

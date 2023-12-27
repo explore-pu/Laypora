@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class ResourceRequest extends BaseRequest
+class ResourceStoreRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,6 +21,10 @@ class ResourceRequest extends BaseRequest
      */
     public function rules(): array
     {
-        return [];
+        return [
+            'name' => ['required', 'string'],
+            'type' => ['required'],
+            'parent_id' => ['required'],
+        ];
     }
 }

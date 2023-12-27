@@ -1,7 +1,14 @@
-import {get} from "@/axios/index";
+import {get, post} from "@/axios/index";
 
-export const getResources = () => {
+export const apiResources = () => {
   return get("/resources");
 };
 
-export default {getResources}
+export const apiStoreResource = (data) => {
+  return post("/store/resource", data);
+};
+
+export default {
+  apiResources,
+  apiStoreResource,
+}
