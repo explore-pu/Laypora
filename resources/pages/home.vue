@@ -1,5 +1,5 @@
 <template>
-  <div class="relative" @click="RightClickRef.value.classList.add('hidden')" @click.right="$event.preventDefault()">
+  <div class="relative" @click="RightClickRef.classList.add('hidden')" @click.right="$event.preventDefault()">
     <div class="flex">
       <nav class="w-80 h-screen border-r overflow-auto">
         <ul class="px-5 py-2">
