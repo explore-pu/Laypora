@@ -30,15 +30,42 @@ class ResourceController extends Controller
             $user = $request->user();
 
             $data = $request->validated();
-            $data['user_id'] = $user->id;
-            $data['created_at'] = date('Y-m-d H:i:s');
-            $data['updated_at'] = date('Y-m-d H:i:s');
 
-            $id = Resource::query()->insertGetId($data);
+            $resource = new Resource();
 
-            return response()->json($id);
+            $resource->user_id = $user->id;
+            $resource->parent_id = $data['parent_id'];
+            $resource->type = $data['type'];
+            $resource->name = $data['name'];
+            $resource->save();
+
+            return response()->json($resource->id);
         } catch (Exception $exception) {
-            return response()->json($exception->getMessage(), 500);
+            return response()->json(['msg'=> $exception->getMessage()], 500);
+        }
+    }
+
+    public function rename(Request $request, string $id)
+    {
+        try {
+            $resource = Resource::query()->find($id);
+            $resource->name = $request->post('name');
+            $resource->save();
+
+            return response()->json(['msg' => '重命名成功']);
+        } catch (Exception $exception) {
+            return response()->json(['msg'=> $exception->getMessage()], 500);
+        }
+    }
+
+    public function destroy(string $id)
+    {
+        try {
+            Resource::query()->find($id)->delete();
+
+            return response()->json(['msg' => '删除成功']);
+        } catch (Exception $exception) {
+            return response()->json(['msg'=> $exception->getMessage()], 500);
         }
     }
 }

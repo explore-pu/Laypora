@@ -11,9 +11,9 @@
                      @checkFile="checkFile">
         </ComResource>
       </li>
-      <li class="py-1 truncate" :title="resource.name" :key="resource.id" @click.stop="checkFile($event)" @click.right.stop="navRightClick($event, resource)" v-else>
+      <li class="py-1 truncate" :title="resource.name" :key="resource.id" @click.stop="checkFile($event, resource.id)" @click.right.stop="navRightClick($event, resource)" v-else>
         <img class="inline-block pr-1 mb-1 pl-1" src="@/assets/file.svg" alt="file">
-        <span>{{ resource.name }}</span>
+        <span>{{ resource.name }}.md</span>
       </li>
     </template>
   </ul>
@@ -43,7 +43,7 @@ const checkFolder = (event) => {
   emit('checkFolder', event);
 }
 // 定义组件
-const checkFile = (event) => {
-  emit('checkFile', event);
+const checkFile = (event, id) => {
+  emit('checkFile', event, id);
 }
 </script>

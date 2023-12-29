@@ -27,7 +27,11 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->get('/resources', ['uses' => 'ResourceController@index', 'as' => 'resources.index', 'name' => '资源列表']);
-        $router->post('/store/resource', ['uses' => 'ResourceController@store', 'as' => 'resources.store', 'name' => '资源存储']);
+        $router->post('/resource', ['uses' => 'ResourceController@store', 'as' => 'resource.store', 'name' => '资源存储']);
+        $router->put('/resource/{id}', ['uses' => 'ResourceController@rename', 'as' => 'resource.rename', 'name' => '资源重命名']);
+        $router->delete('/resource/{id}', ['uses' => 'ResourceController@destroy', 'as' => 'resource.destroy', 'name' => '资源销毁']);
 
+        $router->get('/markdown/{id}', ['uses' => 'MarkdownController@show', 'as' => 'markdown.show', 'name' => '文档查看']);
+        $router->post('/markdown/{id}', ['uses' => 'MarkdownController@save', 'as' => 'markdown.save', 'name' => '文档保存']);
     });
 });
